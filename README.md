@@ -109,40 +109,71 @@ In the code above, Python variables appear on the right side of each equal sign 
 
 #### If statements
 
-Similar to the previous example on [Placeholder Variables](#placeholder-variables), we can add conditionals in our Jinja templates as well to make our templates dynamic.
+Similar to the previous example on [Placeholder Variables](#placeholder-variables), Jinja conditionals let us choose the HTML we use based on the template variables we pass in.
 
 ```html
 <body>
   {% if template_number_of_albums > 10 %}
   <h1 class="legendary-artist">Legendary Artist</h1>
-  <!-- Custom page format for legendary artists only!  -->
+  <!-- Custom HTML for legendary artists goes here -->
   <h1 class="experienced-artist">Experienced Artist</h1>
-  <!-- Custom page format for experienced artists only!  -->
+  <!-- Custom HTML for experienced artists goes here  -->
   {% else %}
   <h1 class="rising-star">Rising Star</h1>
-  <!-- Custom page format for rising stars only!  -->
+  <!-- Custom HTML for rising stars goes here -->
   {% endif %}
   <!-- Outside the if/elif/else. The code below is always shown. -->
   <p>{{ template_artist_name }} has put out {{ template_number_of_albums }} albums.</p>
 </body>
 ```
-In the code above, we use our pre-existing template variable `template_number_of_albums` to update the text within our HTML document.
+In the code above, we use our pre-existing template variable `template_number_of_albums` to choose what HTML to show within our HTML document. At the end, we indicate how many albums the artist has produced.
 
 #### For loops 
 
+Lastly, Jinja for loops allow us to loop through **iterable** variables, such as lists or strings.
+
+Take a look at the example below to see how this works:
+
+```python
+artist_name = "Slide (Remix)"
+song_name = "H.E.R."
+# List of featured artists.
+features_list = ["Pop Smoke", "A Boogie Wit da Hoodie", "Chris Brown"]
+# Call to render the page.
+render_template(
+  "playlists.html", 
+  template_song_name = song_name, 
+  template_artist_name = artist_name, 
+  template_features_list = features_list
+)
+```
+The code above passes variables in our Python code to the HTML template.
+Note that the `features_list` is a Python list.
+
+In `playlists.html`, we update the template to include the template variables. 
+Using a for loop, we can access each of the featured artists on a given song: 
+
 ```html
-<div>
-  <ul>
-    {% for item in my_list %}
-    <li> {{ item }} </li>
-    {% endfor %}
-  </ul>
+<!-- playlists.html --> 
+<div class="song-details">
+  <h3>Favorite song: {{ template_song_name }}</h3>
+  <div class="song-discography">
+    <p class="song-creator-details"> {{ template_artist_name }} </p>
+    <ul>
+      {% for featured_artist in template_features_list %}
+      <li> {{ featured_artist }} </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 ```
+This template sets up a div that contains the song name, song artist, and a bullet point for each of the featured artists on the song.
 
-### Templating Example
+### Putting it together: a comprehensive example
 
 Let's consider an example. Suppose we want to show the time that the user arrived on the page.
+
+> Hint: You may want to use something similar to get the time when deciding the time of day for dark mode!
 
 First we'll write some code that will get the time for us and print it nicely in a string. 
 
