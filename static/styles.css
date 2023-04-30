@@ -1,0 +1,60 @@
+body {
+	background-color: white;
+	color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: #191414;
+  margin: 10%;
+}
+
+a.back {
+	color:white;
+  margin-left:1px;
+  margin-right:1px;
+}
+
+button {
+  background-color: #191414;
+  width: auto;
+  height: auto;
+}
+
+li {
+  color: #191414;
+  border-bottom-color: #191414;
+  border-bottom-width: 3px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.container {
+  display: flex;
+}
+
+.navbar {
+  background-color: #191414;
+}
+
+/* align-content = y-axis, justify-content = x-axis */
+.content {
+  flex-grow: 2;
+  background-color: #20d762;
+  justify-content: center;
+}
+
+.left {
+  flex-grow: 1;
+  justify-self: flex-start;
+}
+
+.right {
+  margin: 10%;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.center {
+  flex-grow: inherit;
+}
