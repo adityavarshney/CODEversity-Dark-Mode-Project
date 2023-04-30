@@ -39,9 +39,9 @@ Other resources in case anything below is confusing:
 Let's suppose that we add the following code to our HTML:
 
 ```html
-<p> {{ artist_name }} </p>
-<p> {{ number_of_albums }} </p>
-<p> {{ favorite_song }} </p>
+<p> {{ template_artist_name }} </p>
+<p> {{ template_number_of_albums }} </p>
+<p> {{ template_favorite_song }} </p>
 ```
 
 This creates Jinja placeholders.
@@ -52,21 +52,78 @@ artist_name = "Miguel"
 number_of_albums = 4
 favorite_song = "Sky Walker"
 
-render_template("playlists.html", artist_name = artist_name, number_of_albums = number_of_albums, favorite_song = favorite_song)
+render_template(
+  "playlists.html", 
+  template_artist_name = artist_name, 
+  template_number_of_albums = number_of_albums, 
+  template_favorite_song = favorite_song
+)
 ```
-Note that above, we are setting up our Python variables and then passing in the name of each variable to `render_template` to match up with a placeholder that we include in our HTML.
+In the code above, Python variables appear on the right side of each equal sign while the template name values appear on the left side. 
+
+> ##### :brain: Advanced: How does `render_template` work? 
+> The way we pass template variables and values to `render_template` is quite different from standard Python syntax.
+> Normally, Python functions have a fixed number of arguments and variables.
+> Take this example that prints out song name and metadata
+> ```python
+> def print_song(song_name: str) -> None:
+>   print(f"Song name is {song_name}")
+>
+> # Call the function.
+> print_song("Sky Walker")
+> ```
+>  
+> `render_template`, however, supports *ANY* valid Jinja template and has no way of knowing
+> the template variables and Python values it will receive in advance.
+> Instead, it accepts arguments as keyword arguments, or `kwargs` for short, and handles them
+> in a generic way to update the template no matter which variables are passed in.
+>
+> This is a common pattern for when function parameters and values are not known in advance.
+> In the example below, we create a function called `print_song_name_and_other_metadata` that takes in a known argument as well as `kwargs` and prints out the different values.
+> ```python
+> def print_song_name_and_other_metadata(song_name: str, **kwargs) -> None:
+>   print(f"Song name is {song_name}")
+>   for metadata_key, metadata_value in kwargs.items():
+>     print(f"Key: {metadata_key}")
+>     print("____")
+>     print(f"Value: {metadata_value}")
+>
+> # Call the function
+> print_song_name_and_other_metadata(
+>   "Sky walker", 
+>    album = "War & Leisure", 
+>    released = 2017,
+>    artist = "Miguel",
+>  )
+> ```
+> Notice how similar this function call is to our `render_template` call above:
+> ```python
+> render_template(
+>   "playlists.html", 
+>   template_artist_name = artist_name, 
+>   template_number_of_albums = number_of_albums, 
+>   template_favorite_song = favorite_song
+> )
+> ```
+> This should give you an idea of how `render_template` works under the hood :stuck_out_tongue_winking_eye:
 
 #### If statements
 
+Similar to the previous example, we can add conditionals in our Jinja templates as well to make our templates dynamic.
+
 ```html
 <div>
-  {% if n > 100 %}
-  yay
+  {% if template_number_of_albums > 10 %}
+  Legendary Artist
+  {% elif template_number_of_albums > 5 %}
+  Experienced Artist
   {% else %}
-  boo
+  Rising Star
   {% endif %}
 </div>
 ```
+> In the code above, we use our pre-existing template variable `template_number_of_albums` to update the text within our HTML document. 
+
 #### For loops 
 
 ```html
