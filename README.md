@@ -221,7 +221,89 @@ Then in our `time.html` file we will use **Jinja syntax** to add the **current_t
 With this example in place, let's look at some more interesting uses of templating!
 ____
 
-## Recommended Concerts!
+
+## Part 1: Dark mode
+
+Suppose we want to add a dark mode or light mode feature to our page. Something like this:
+
+![image](image.png)
+
+☀️ Between 6:00 AM and 6:00 PM, inclusive, the website is in light mode. ☀️
+
+🌙 Between 6:00 PM and 6:00 AM, the website is in dark mode. 🌙
+
+#### QUESTION: How do we get the time?
+To get the time we'll use the `datetime` library from before. We'll compare this time with some other times:
+
+```python
+# import the datetime library
+from datetime import datetime, time 
+
+# get the current time object
+# for example: datetime.time(4, 16, 1, 504774)
+def get_current_time():
+  return datetime.now().time()
+
+# create a time object (24 hour clock)
+# for example: get_time(1, 0, 0) -> datetime.time(1, 0)
+def get_time(hours, minutes, seconds):
+  return time(hours=hours, minutes=minutes, seconds=seconds)
+```
+
+#### QUESTION: How do we figure out if we need light mode or dark mode? 
+
+```python
+# compare the current time with 6:00 PM and 6:00 AM
+# return True if we need to be using light mode
+# return False if we should use dark mode
+# Hint: compare get_current_time() with the result from get_time(...) at *specific* times in the day to find out if we should choose light mode or dark mode.
+def use_light_mode():
+  print("YOUR CODE HERE")
+```
+
+
+#### QUESTION: How do we pass our light/dark mode decision to our front-end?
+
+Pass the result of `use_light_mode` into `render_template` with a placeholder (maybe call it `_use_light_mode`).
+
+
+#### QUESTION: How do we update our web theme to be dark mode? 
+
+Two options:
+1. Add an if-statement template around the `<link>` tag that connects the webpage with another style-sheet. This approach is best for intricate modes.
+2. Add an if-statement template around a `<style>` tag that contains custom CSS to handle one of the modes. This approach is good if your light mode only involves a few changes.
+
+#### QUESTION: How do we update our styles based on the time?
+
+- We could update which stylesheet we use. If we are using light mode, pick a stylesheet with lighter colors. If not, use a stylesheet with darker colors.
+
+In the html files:
+```html
+{% if ... %} 
+  <link rel="stylesheet" href="...">
+{% else %} 
+  <link rel="stylesheet" href="...">
+{% endif %}
+```
+
+- We can use templating with `<style>` tags. If it's the time for light mode, we don't do anything (light mode is default). If it's time for dark mode, we use a different set of styles
+
+In the html files:
+```html
+{% if ... %}  <--! check if it's time for dark mode -->
+  <style>
+    // add dark mode css
+  </style>
+{% endif %}
+```
+
+#### Add light/dark mode to all pages in your webpage
+
+Now that you've got light/dark mode working, make sure all pages in your site implement it!
+
+___
+
+## Part 2: Recommended Concerts!
 
 In `recommendations.html`, we showcased our favorite songs, albums, and artists. 
 
@@ -282,83 +364,3 @@ Things to try:
 9. **MILD** Add even more information to the concert listing. Can you find ticket prices, links to buy tickets, merch images? From start to finish, what changes would you need to make to show these elements to the user. 
 
 10. **MILD** Update the `<p>` tags to be `<div>` tags that lay out these different pieces of information in a nice format.
-
-___
-
-## Dark mode
-
-Suppose we want to add a dark mode or light mode feature to our page. Something like this:
-
-![image](image.png)
-
-☀️ Between 6:00 AM and 6:00 PM, inclusive, the website is in light mode. ☀️
-
-🌙 Between 6:00 PM and 6:00 AM, the website is in dark mode. 🌙
-
-#### QUESTION: How do we get the time?
-To get the time we'll use the datetime library from before. We'll compare this time with some other times:
-
-```python
-from datetime import datetime, time 
-
-# get the current time object
-# for example: datetime.time(4, 16, 1, 504774)
-def get_current_time():
-  return datetime.now().time()
-
-# create a time object (24 hour clock)
-# for example: get_time(1, 0, 0) -> datetime.time(1, 0)
-def get_time(hours, minutes, seconds):
-  return time(hours=hours, minutes=minutes, seconds=seconds)
-```
-
-#### QUESTION: How do we figure out if we need light mode or dark mode? 
-
-```python
-# compare the current time with 6:00 PM and 6:00 AM
-# return True if we need to be using light mode
-# return False if we should use dark mode
-# Hint: compare get_current_time() with the result from get_time(...) at *specific* times in the day to find out if we should choose light mode or dark mode.
-def use_light_mode():
-  print("YOUR CODE HERE")
-```
-
-
-#### QUESTION: How do we pass our light/dark mode decision to our front-end?
-
-Pass the result of `use_light_mode` into `render_template` with a placeholder (maybe call it `light_mode`).
-
-
-#### QUESTION: How do we update our web theme to be dark mode? 
-
-Two options:
-1. Add an if-statement template around the `<link>` tag that connects the webpage with another style-sheet. This approach is best for intricate modes.
-2. Add an if-statement template around a `<style>` tag that contains custom CSS to handle one of the modes. This approach is good if your light mode only involves a few changes.
-
-#### QUESTION: How do we update our styles based on the time?
-
-- We could update which stylesheet we use. If we are using light mode, pick a stylesheet with lighter colors. If not, use a stylesheet with darker colors.
-
-In the html files:
-```html
-{% if ... %} 
-  <link rel="stylesheet" href="...">
-{% else %} 
-  <link rel="stylesheet" href="...">
-{% endif %}
-```
-
-- We can use templating with `<style>` tags. If it's the time for light mode, we don't do anything (light mode is default). If it's time for dark mode, we use a different set of styles
-
-In the html files:
-```html
-{% if ... %}  <--! check if it's time for dark mode -->
-  <style>
-    // add dark mode css
-  </style>
-{% endif %}
-```
-
-#### Add light/dark mode to all pages in your webpage
-
-Now that you've got light/dark mode working, make sure all pages in your site implement it!
