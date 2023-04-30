@@ -6,11 +6,11 @@ Welcome to CODEversity Project 2. This project will take about 2 weeks and it wi
 
 [Project 0](https://replit.com/@adityavarshney1/CODEversity-Spotify-P0) started with a simple app built with Flask. When we ran our app, a page opened up containing a header with the text "Hello world". Our website was born.
 
-[Project 1](https://replit.com/@adityavarshney1/CODEversity-Spotify-P1) created new HTML and CSS files, added new assets to the page, and updated the code to contain relevant content and styling.
+[Project 1](https://replit.com/@adityavarshney1/CODEversity-Spotify-P1) created a webpage that showcased our favorite music. To do this, we built HTML files for each page, added images into our project, and updated styling rules in CSS.
 
 ## Goals for Project 2
 
-For this section, we want to use flask to make live updates to our page. To do this, we'll use flask's **templating**. 
+For this section, we want to use flask to make live updates to our page. To do this, we'll use flask's **templating**.
 
 ### Templating using Jinja
 
