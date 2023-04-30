@@ -109,20 +109,24 @@ In the code above, Python variables appear on the right side of each equal sign 
 
 #### If statements
 
-Similar to the previous example, we can add conditionals in our Jinja templates as well to make our templates dynamic.
+Similar to the previous example on [Placeholder Variables](#placeholder-variables), we can add conditionals in our Jinja templates as well to make our templates dynamic.
 
 ```html
-<div>
+<body>
   {% if template_number_of_albums > 10 %}
-  Legendary Artist
-  {% elif template_number_of_albums > 5 %}
-  Experienced Artist
+  <h1 class="legendary-artist">Legendary Artist</h1>
+  <!-- Custom page format for legendary artists only!  -->
+  <h1 class="experienced-artist">Experienced Artist</h1>
+  <!-- Custom page format for experienced artists only!  -->
   {% else %}
-  Rising Star
+  <h1 class="rising-star">Rising Star</h1>
+  <!-- Custom page format for rising stars only!  -->
   {% endif %}
-</div>
+  <!-- Outside the if/elif/else. The code below is always shown. -->
+  <p>{{ template_artist_name }} has put out {{ template_number_of_albums }} albums.</p>
+</body>
 ```
-> In the code above, we use our pre-existing template variable `template_number_of_albums` to update the text within our HTML document. 
+In the code above, we use our pre-existing template variable `template_number_of_albums` to update the text within our HTML document.
 
 #### For loops 
 
