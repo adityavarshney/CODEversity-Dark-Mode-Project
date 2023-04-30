@@ -32,8 +32,7 @@ This section has a lot of new content, so please take a careful look at the exam
 
 Other resources in case anything below is confusing:
 * [RealPython's Primer on Jinja Templating](https://realpython.com/primer-on-jinja-templating/#use-an-external-file-as-a-template)
-* 
-
+* [Flask's docs on Templates](https://flask.palletsprojects.com/en/1.1.x/tutorial/templates/)
 
 #### Placeholder Variables
 
