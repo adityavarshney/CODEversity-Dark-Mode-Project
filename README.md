@@ -261,17 +261,9 @@ def use_light_mode():
   print("YOUR CODE HERE")
 ```
 
-
 #### QUESTION: How do we pass our light/dark mode decision to our front-end?
 
 Pass the result of `use_light_mode` into `render_template` with a placeholder (maybe call it `_use_light_mode`).
-
-
-#### QUESTION: How do we update our web theme to be dark mode? 
-
-Two options:
-1. Add an if-statement template around the `<link>` tag that connects the webpage with another style-sheet. This approach is best for intricate modes.
-2. Add an if-statement template around a `<style>` tag that contains custom CSS to handle one of the modes. This approach is good if your light mode only involves a few changes.
 
 #### QUESTION: How do we update our styles based on the time?
 
